@@ -2,8 +2,8 @@
 
 namespace Goodmagma\Translations\Console;
 
-use Illuminate\Console\Command;
 use Goodmagma\Translations\Core\TranslationExporter;
+use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 
 class ExportTranslationsCommand extends Command
@@ -22,7 +22,6 @@ class ExportTranslationsCommand extends Command
      */
     protected $description = 'Export translatable strings for a language to a JSON file.';
 
-    
     /**
      * ExportCommand constructor.
      *

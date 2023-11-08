@@ -2,16 +2,15 @@
 
 namespace Goodmagma\Translations\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Goodmagma\Translations\Console\ExportTranslationsCommand;
 use Goodmagma\Translations\Console\CheckTranslationsCommand;
+use Goodmagma\Translations\Console\ExportTranslationsCommand;
 use Goodmagma\Translations\Core\TranslationExporter;
 use Goodmagma\Translations\Core\UntranslatedStringFinder;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\ServiceProvider;
 
 class TranslationsServiceProvider extends ServiceProvider
 {
-
     /**
      * Perform post-registration booting of services.
      *
@@ -20,10 +19,10 @@ class TranslationsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../../config/translations.php' => config_path('translations.php')
+            __DIR__ . '/../../config/translations.php' => config_path('translations.php'),
         ], 'translations-config');
     }
-    
+
     /**
      * Register the service provider.
      *
@@ -35,18 +34,18 @@ class TranslationsServiceProvider extends ServiceProvider
         $this->app->singleton(TranslationExporter::class, function (Application $app) {
             return new TranslationExporter();
         });
-        
+
         $this->app->singleton(ExportTranslationsCommand::class, function (Application $app) {
             return new ExportTranslationsCommand($app->make(TranslationExporter::class));
         });
         $this->commands(ExportTranslationsCommand::class);
-        
 
-        
+
+
         $this->app->singleton(UntranslatedStringFinder::class, function (Application $app) {
             return new UntranslatedStringFinder();
         });
-            
+
         $this->app->singleton(CheckTranslationsCommand::class, function ($app) {
             return new CheckTranslationsCommand(
                 $app->make(TranslationExporter::class),
@@ -67,7 +66,7 @@ class TranslationsServiceProvider extends ServiceProvider
             TranslationExporter::class,
             ExportTranslationsCommand::class,
             UntranslatedStringFinder::class,
-            CheckTranslationsCommand::class
+            CheckTranslationsCommand::class,
         ];
     }
 }

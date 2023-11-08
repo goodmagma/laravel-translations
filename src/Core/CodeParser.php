@@ -53,7 +53,7 @@ class CodeParser
             }
 
             $pattern_key = str_replace('[FUNCTIONS]', $func, $this->basePattern);
-            
+
             $this->patterns[$pattern_key] = $callable;
         }
     }

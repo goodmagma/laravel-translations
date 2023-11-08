@@ -2,10 +2,10 @@
 
 namespace Goodmagma\Translations\Core;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Lang;
 use Goodmagma\Translations\Core\Utils\IO;
 use Goodmagma\Translations\Core\Utils\JSON;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Lang;
 
 class TranslationExporter
 {

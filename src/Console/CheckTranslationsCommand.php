@@ -2,10 +2,10 @@
 
 namespace Goodmagma\Translations\Console;
 
+use Goodmagma\Translations\Core\TranslationExporter;
+use Goodmagma\Translations\Core\UntranslatedStringFinder;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use \Goodmagma\Translations\Core\TranslationExporter;
-use \Goodmagma\Translations\Core\UntranslatedStringFinder;
 use Symfony\Component\Console\Input\InputArgument;
 
 class CheckTranslationsCommand extends Command

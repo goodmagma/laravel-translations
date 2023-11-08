@@ -18,10 +18,10 @@ class IO
      */
     public static function write(string $content, string $path)
     {
-        if (!file_exists( dirname($path) )) {
-            mkdir( dirname($path) );
+        if (! file_exists(dirname($path))) {
+            mkdir(dirname($path));
         }
-        
+
         file_put_contents($path, $content . PHP_EOL);
     }
 
