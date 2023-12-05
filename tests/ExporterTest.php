@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Goodmagma\Translations\Core\Exporter;
+use Goodmagma\Translations\Core\TranslationsExporter;
 use Tests\__fixtures\classes\Transformer;
 
 class ExporterTest extends BaseTestCase
@@ -13,9 +13,9 @@ class ExporterTest extends BaseTestCase
 
         $this->createTestView("{{ __('name') }}");
 
-        $this->artisan('translatable:export', ['lang' => 'bg,es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the bg.json file.')
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
+        $this->artisan('translations:export', ['lang' => 'bg,es'])
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/bg.json file.')
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
         $this->assertFileExists($this->getTranslationFilePath('bg'));
@@ -44,8 +44,8 @@ class ExporterTest extends BaseTestCase
 
         $this->createTestView(implode(' ', $template_strings));
 
-        $this->artisan('translatable:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
+        $this->artisan('translations:export', ['lang' => 'es'])
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
         $expected = [
@@ -73,8 +73,8 @@ class ExporterTest extends BaseTestCase
 
         $this->createTestView($view);
 
-        $this->artisan('translatable:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
+        $this->artisan('translations:export', ['lang' => 'es'])
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
         $actual = $this->getTranslationFileContent('es');
@@ -106,8 +106,8 @@ EOD;
 
         $this->createTestView($view);
 
-        $this->artisan('translatable:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
+        $this->artisan('translations:export', ['lang' => 'es'])
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
         $actual = $this->getTranslationFileContent('es');
@@ -124,38 +124,8 @@ EOD;
         $this->assertEquals($expected, $actual);
     }
 
-    public function testMultiLineSupportDisabled()
+    public function testMultiLineSupport()
     {
-        $this->removeJsonLanguageFiles();
-
-        $view = "{{ __('single line') }} " .
-            "{{ __('translation.keys') }} " .
-            // Verify legacy behaviours:
-            // 1) Strings including escaped newlines (\n) are processed
-            "{{ __('escaped\\nnewline') }}" .
-            // 2) Strings including un-escaped newlines are ignored.
-            "{{ __(\"ignored\nmultiple\nline\nstring\") }}";
-
-        $this->createTestView($view);
-
-        $this->artisan('translatable:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
-            ->assertExitCode(0);
-
-        $actual = $this->getTranslationFileContent('es');
-        $expected = [
-            'single line' => 'single line',
-            'translation.keys' => 'translation.keys',
-            'escaped\\nnewline' => 'escaped\\nnewline',
-        ];
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    public function testMultiLineSupportEnabled()
-    {
-        $this->app['config']->set('laravel-translatable-string-exporter.allow-newlines', true);
-
         $this->removeJsonLanguageFiles();
 
         $view = "{{ __('single line') }} " .
@@ -171,8 +141,8 @@ EOD;
 
         $this->createTestView($view);
 
-        $this->artisan('translatable:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
+        $this->artisan('translations:export', ['lang' => 'es'])
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
         $actual = $this->getTranslationFileContent('es');
@@ -187,7 +157,7 @@ EOD;
         $this->assertEquals($expected, $actual);
     }
 
-    public function testNewLineParametersIssue57()
+    public function testNewLineParameters1()
     {
         $this->removeJsonLanguageFiles();
 
@@ -205,8 +175,8 @@ EOD;
 
         $this->createTestView($view);
 
-        $this->artisan('translatable:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
+        $this->artisan('translations:export', ['lang' => 'es'])
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
         $actual = $this->getTranslationFileContent('es');
@@ -220,7 +190,7 @@ EOD;
         $this->assertEquals($expected, $actual);
     }
 
-    public function testNewLineParametersIssue45()
+    public function testNewLineParameters2()
     {
         $this->removeJsonLanguageFiles();
 
@@ -230,8 +200,8 @@ EOD;
 
         $this->createTestView($view);
 
-        $this->artisan('translatable:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
+        $this->artisan('translations:export', ['lang' => 'es'])
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
         $actual = $this->getTranslationFileContent('es');
@@ -259,8 +229,8 @@ EOD;
 
         $this->createTestView("{{ __('name1_en') }}");
 
-        $this->artisan('translatable:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
+        $this->artisan('translations:export', ['lang' => 'es'])
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
         $actual = $this->getTranslationFileContent('es');
@@ -275,8 +245,8 @@ EOD;
 
         $this->createTestView("{{ __('name1_en') . __('name2_en') }}");
 
-        $this->artisan('translatable:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
+        $this->artisan('translations:export', ['lang' => 'es'])
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
         $actual = $this->getTranslationFileContent('es');
@@ -291,8 +261,8 @@ EOD;
 
         $this->createTestView("{{ __('name2_en') }}");
 
-        $this->artisan('translatable:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
+        $this->artisan('translations:export', ['lang' => 'es'])
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
         $actual = $this->getTranslationFileContent('es');
@@ -323,14 +293,14 @@ EOD;
         // 2. Create a file with the keys of any strings which should persist even if they are not contained in the views.
 
         $persistentContent = json_encode(['name2_en']);
-        $this->writeToTranslationFile(Exporter::PERSISTENT_STRINGS_FILENAME_WO_EXT, $persistentContent);
+        $this->writeToTranslationFile(TranslationsExporter::PERSISTENT_STRINGS_FILENAME, $persistentContent);
 
         // 3. Create a test view only containing one of the non-persistent strings, and a new string.
 
         $this->createTestView("{{ Existing string: __('name1_en') New string: __('name4_en') }}");
 
-        $this->artisan('translatable:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
+        $this->artisan('translations:export', ['lang' => 'es'])
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
         $actual = $this->getTranslationFileContent('es');
@@ -346,56 +316,9 @@ EOD;
         $this->assertEquals($expected, $actual);
     }
 
-    public function testAddingPersistentStringsToExport()
-    {
-        $this->app['config']->set(
-            'laravel-translatable-string-exporter.add-persistent-strings-to-translations',
-            true
-        );
-
-        $this->removeJsonLanguageFiles();
-
-        // 1. Create a translation file ourselves.
-
-        $existing_translations = [
-            'name1_en' => 'name1_es',
-            'name2_en' => 'name2_es',
-            'name3_en' => 'name3_es',
-        ];
-
-        $content = json_encode($existing_translations);
-
-        $this->writeToTranslationFile('es', $content);
-
-        // 2. Create a file with the keys of any strings which should persist
-        // even if they are not contained in the views.
-
-        $persistentContent = json_encode(['name3_en', 'name5_en']);
-        $this->writeToTranslationFile(Exporter::PERSISTENT_STRINGS_FILENAME_WO_EXT, $persistentContent);
-
-        // 3. Create a test view only containing a new string and a string that is also in persistent strings.
-
-        $this->createTestView("{{ __('name1_en') . __('name2_en') . __('name3_en') . __('name4_en') }}");
-
-        $this->artisan('translatable:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
-            ->assertExitCode(0);
-
-        $actual = $this->getTranslationFileContent('es');
-
-        // The new and persistent strings should be added. The rest should remain.
-
-        $expected = array_merge($existing_translations, [
-            'name4_en' => 'name4_en',
-            'name5_en' => 'name5_en',
-        ]);
-
-        $this->assertEquals($expected, $actual);
-    }
-
     public function testIgnoreTranslationKeysEnabled()
     {
-        $this->app['config']->set('laravel-translatable-string-exporter.exclude-translation-keys', true);
+        $this->app['config']->set('translations.exclude-translation-keys', true);
 
         $this->removeJsonLanguageFiles();
 
@@ -409,8 +332,8 @@ EOD;
 
         $this->createTestView($view);
 
-        $this->artisan('translatable:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
+        $this->artisan('translations:export', ['lang' => 'es'])
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
         $actual = $this->getTranslationFileContent('es');
@@ -425,10 +348,10 @@ EOD;
         $this->assertEquals($expected, $actual);
     }
 
-    public function testPuttingUntranslatedStringsToTop()
+    public function testUntranslatedStringsToTop()
     {
         $this->app['config']->set(
-            'laravel-translatable-string-exporter.put-untranslated-strings-at-the-top',
+            'translations.untranslated-strings-at-the-top',
             true
         );
 
@@ -449,14 +372,14 @@ EOD;
         // 2. [Sorting disabled] Create a test view with translated and untranslated strings.
 
         $this->app['config']->set(
-            'laravel-translatable-string-exporter.sort-keys',
+            'translations.sort-keys',
             false
         );
 
         $this->createTestView("{{ __('name1_en') . __('name2_en') . __('name3_en') . __('name5_en') . __('name4_en') }}");
 
-        $this->artisan('translatable:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
+        $this->artisan('translations:export', ['lang' => 'es'])
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
         $actual = $this->getTranslationFileContent('es');
@@ -472,14 +395,14 @@ EOD;
         // 3. [Sorting enabled] Create a test view with translated and untranslated strings.
 
         $this->app['config']->set(
-            'laravel-translatable-string-exporter.sort-keys',
+            'translations.sort-keys',
             true
         );
 
         $this->createTestView("{{ __('name1_en') . __('name2_en') . __('name3_en') . __('name5_en') . __('name4_en') }}");
 
         $this->artisan('translatable:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
         $actual = $this->getTranslationFileContent('es');
@@ -495,7 +418,7 @@ EOD;
 
     public function testSettingAFunctionToTransform()
     {
-        $this->app['config']->set('laravel-translatable-string-exporter.functions.aFunction', fn ($s) => \strtoupper(\str_replace(["-","_"], " ", $s)));
+        $this->app['config']->set('translations.functions.aFunction', fn ($s) => \strtoupper(\str_replace(["-","_"], " ", $s)));
 
         $this->removeJsonLanguageFiles();
 
@@ -503,8 +426,8 @@ EOD;
 
         $this->createTestView($view);
 
-        $this->artisan('translatable:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
+        $this->artisan('translations:export', ['lang' => 'es'])
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
         $actual = $this->getTranslationFileContent('es');
@@ -517,8 +440,8 @@ EOD;
 
     public function testSettingACallableToTransform()
     {
-        $this->app['config']->set('laravel-translatable-string-exporter.functions.staticMethod', [Transformer::class, 'staticMethod']);
-        $this->app['config']->set('laravel-translatable-string-exporter.functions.publicMethod', [new Transformer(), 'publicMethod']);
+        $this->app['config']->set('translations.functions.staticMethod', [Transformer::class, 'staticMethod']);
+        $this->app['config']->set('translations.functions.publicMethod', [new Transformer(), 'publicMethod']);
 
         $this->removeJsonLanguageFiles();
 
@@ -526,8 +449,8 @@ EOD;
 
         $this->createTestView($view);
 
-        $this->artisan('translatable:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the es.json file.')
+        $this->artisan('translations:export', ['lang' => 'es'])
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
         $actual = $this->getTranslationFileContent('es');

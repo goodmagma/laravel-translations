@@ -2,7 +2,7 @@
 
 namespace Goodmagma\Translations\Console;
 
-use Goodmagma\Translations\Core\TranslationExporter;
+use Goodmagma\Translations\Core\TranslationsExporter;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -25,10 +25,10 @@ class ExportTranslationsCommand extends Command
     /**
      * ExportCommand constructor.
      *
-     * @param  \Goodmagma\Translations\Core\TranslationExporter  $exporter
+     * @param  \Goodmagma\Translations\Core\TranslationsExporter  $exporter
      * @return void
      */
-    public function __construct(protected TranslationExporter $exporter)
+    public function __construct(protected TranslationsExporter $exporter)
     {
         parent::__construct();
     }
@@ -45,7 +45,7 @@ class ExportTranslationsCommand extends Command
         foreach ($languages as $language) {
             $this->exporter->export($language);
 
-            $this->info('Translatable strings have been extracted and written to the ' . $language . '.json file.');
+            $this->info('Translatable strings have been extracted and written to the lang/' . $language . '.json file.');
         }
 
         return static::SUCCESS;

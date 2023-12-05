@@ -41,7 +41,7 @@
 	"extra" : {
 		"laravel" : {
 			"providers" : [
-				"Goodmagma\\Translations\\Providers\\ExporterServiceProvider"
+				"Goodmagma\\Translations\\TranslationsServiceProvider"
 			]
 		}
 	},
