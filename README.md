@@ -1,5 +1,6 @@
 # Export Strings and Automatic translate via Google Translate Tools for Laravel
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/goodmagma/laravel-translations.svg?style=for-the-badge)](https://packagist.org/packages/goodmagma/laravel-translations)
 [![Tests Status Badge](https://github.com/goodmagma/laravel-translations/actions/workflows/run-tests.yml/badge.svg)](https://github.com/goodmagma/laravel-translations/actions/workflows/run-tests.yml)
 [![PHPStan Status Badge](https://github.com/goodmagma/laravel-translations/actions/workflows/phpstan.yml.yml/badge.svg)](https://github.com/goodmagma/laravel-translations/actions/workflows/phpstan.yml.yml)
 [![Code Styles Check Badge](https://github.com/goodmagma/laravel-translations/actions/workflows/php-cs-fixer.yml/badge.svg)](https://github.com/goodmagma/laravel-translations/actions/workflows/php-cs-fixer.yml)
