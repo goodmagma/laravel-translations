@@ -35,7 +35,7 @@ class CodeParser
     public function __construct()
     {
         $this->functions = config(
-            'translation-tools.functions',
+            'translations.functions',
             [
                 '__',
                 '_t',

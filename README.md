@@ -3,13 +3,21 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/goodmagma/laravel-translations.svg?style=for-the-badge)](https://packagist.org/packages/goodmagma/laravel-translations)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/goodmagma/laravel-translations/run-tests.yml?branch=master&label=tests&style=for-the-badge)](https://github.com/goodmagma/laravel-translations/actions?query=workflow%3Arun-tests+branch%3Amaster)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/goodmagma/laravel-translations/fix-php-code-style-issues.yml?branch=master&label=code%20style&style=for-the-badge)](https://github.com/goodmagma/laravel-translations/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amaster)
-[![Twitter Follow](https://img.shields.io/badge/follow-%40danmasonmp-1DA1F2?logo=twitter&style=for-the-badge)](https://twitter.com/danmasonmp)
 
 You can use `__('Translate me')` or `@lang('Translate me')` with translations in JSON files to translate strings.
 Laravel Translation Tools is composed by two commands:
 
 * exporter: Collect all translatable strings of an application and create corresponding translation files in JSON format
 * autotranslate: Translate all the strings of a specific language and save it to the corresponding JSON file. You may define a `persistent-strings` file in order to keep some translations.
+
+
+## Attribution
+
+This project includes code from the following open-source projects:
+
+**Translatable String Exporter for Laravel**
+- Repository: [https://github.com/kkomelin/laravel-translatable-string-exporter](https://github.com/kkomelin/laravel-translatable-string-exporter)
+- License: [MIT License](https://github.com/kkomelin/laravel-translatable-string-exporter/blob/master/LICENSE)
 
 
 ## Installation
@@ -49,30 +57,23 @@ php artisan translations:export es,bg,de
 
 The command with the `"es,bg,de"` parameter passed will create `es.json`, `bg.json`, `de.json` files with translatable strings or update the existing files in the `lang/` folder of your project.
 
-### Find untranslated strings in a language file (command)
 
-To inspect an existing language file (find untranslated strings), use this command:
-
-```bash
-php artisan translations:inspect-translations fr
-```
-
-The command only supports inspecting one language at a time.
-
-To export translatable strings for a language and then inspect translations in it, use the following command:
+### Translate strings
 
 ```bash
-php artisan translations:inspect-translations fr --export-first
+php artisan translations:translate <lang>
 ```
 
-### Find untranslated strings in a language file (IDE)
+Where `<lang>` is a language code or a comma-separated list of language codes.
+For example:
 
-An alternative way to find untranslated strings in your language files is to search for entries with the same string for original and translated.
-You can do this in most editors using a regular expression.
+```bash
+php artisan translations:translate es
+php artisan translations:translate es,bg,de
+```
 
-In PhpStorm and VSCode, you can use this pattern: `"([^"]*)": "\1"`
 
-### Persistent strings
+### Persistent Strings
 
 Some strings are not included in the export, because they are being dynamically generated. For example:
 
@@ -94,13 +95,33 @@ In order for those, manually added, strings not to get removed the next time you
 ```
 [
   ...,
-  "Dear customer, your order has been %s": "",
+  "Dear customer, your order has been %s": "Gentile cliente, il tuo ordine è stato approvato",
   ...
 ]
 ```
 
-You may also use the `persistent-strings-<lang>.json` file to fix some translations when you use autotranslate. When a translation is defined here will not be automatic translated via Google Translate. This is useful for example when the automatic translation output for a particular string is not what you want.
+You may also use the `persistent-strings-<lang>.json` file to fix some translations when you use translate command. 
+When a translation is defined here will not be automatic translated via Google Translate. This is useful for example when the automatic translation output for a particular string is not accurate.
 
-## License & Copyright
 
-[MIT](LICENSE)
+## Contributing
+
+Contributions are what makes the open source community such an amazing place to learn, inspire and create. Any
+contributions you make are **greatly appreciated**.
+
+- Give us a star :star:
+- Fork and Clone! Awesome
+- Select existing [issues](https://github.com/goodmagma/laravel-translations/issues) or create a [new issue](https://github.com/goodmagma/laravel-translations/issues/new) and give us a PR with your bugfix or improvement after. We love it ❤️
+
+If you want to make a PR:
+
+1. Fork the Project and checkout `develop` branch
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+
+## License
+
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.

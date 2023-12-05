@@ -2,30 +2,30 @@
 
 namespace Tests;
 
-use Goodmagma\Translations\Providers\ExporterServiceProvider;
+use Goodmagma\Translations\TranslationsServiceProvider;
 use Orchestra\Testbench\TestCase;
 
 class BaseTestCase extends TestCase
 {
     protected function getPackageProviders($app)
     {
-        return [ExporterServiceProvider::class];
+        return [TranslationsServiceProvider::class];
     }
 
     protected function getEnvironmentSetUp($app)
     {
         $app->setBasePath(__DIR__ . DIRECTORY_SEPARATOR . '__fixtures');
-        $app['config']->set('laravel-translatable-string-exporter.directories', [
+        $app['config']->set('translations.directories', [
             'resources',
         ]);
 
-        $app['config']->set('laravel-translatable-string-exporter.excluded-directories', [
+        $app['config']->set('translations.excluded-directories', [
             'views/ignored',
         ]);
 
-        $app['config']->set('laravel-translatable-string-exporter.sort-keys', true);
+        $app['config']->set('translations.sort-keys', true);
 
-        $app['config']->set('laravel-translatable-string-exporter.functions', [
+        $app['config']->set('translations.functions', [
             '__',
             '_t',
             '@lang',
@@ -56,6 +56,7 @@ class BaseTestCase extends TestCase
     protected function getTranslationFileContent($language)
     {
         $path = $this->getTranslationFilePath($language);
+
         $content = file_get_contents($path);
 
         return json_decode($content, true);
