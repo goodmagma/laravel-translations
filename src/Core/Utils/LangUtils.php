@@ -61,7 +61,7 @@ class LangUtils
     {
         return function_exists('lang_path') ? lang_path("$language.json") : resource_path("lang/$language.json");
     }
-    
+
     /**
      * Convert an array/object to the properly formatted JSON string.
      *
@@ -72,7 +72,7 @@ class LangUtils
     {
         return json_encode($strings, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     }
-    
+
     /**
      * Convert a JSON string to an array.
      *
