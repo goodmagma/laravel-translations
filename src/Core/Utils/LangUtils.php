@@ -7,6 +7,15 @@ namespace Goodmagma\Translations\Core\Utils;
  */
 class LangUtils
 {
+    
+    /**
+     * The filename without extension for persistent strings.
+     *
+     * @var string
+     */
+    public const PERSISTENT_STRINGS_FILENAME = 'persistent-strings';
+    
+    
     /**
      * Write a string to a file.
      *
@@ -62,6 +71,18 @@ class LangUtils
         return function_exists('lang_path') ? lang_path("$language.json") : resource_path("lang/$language.json");
     }
 
+    /**
+     * Get persistence string language file path.
+     *
+     * @param  string  $language
+     * @return string
+     */
+    public static function persistentStringsLanguageFilePath(string $language)
+    {
+        $persistentStringsFile = self::PERSISTENT_STRINGS_FILENAME . "-$language";
+        return self::languageFilePath($persistentStringsFile);
+    }
+    
     /**
      * Convert an array/object to the properly formatted JSON string.
      *

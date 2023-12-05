@@ -58,6 +58,21 @@ php artisan translations:export es,bg,de
 The command with the `"es,bg,de"` parameter passed will create `es.json`, `bg.json`, `de.json` files with translatable strings or update the existing files in the `lang/` folder of your project.
 
 
+### Translate strings
+
+```bash
+php artisan translations:translate <lang>
+```
+
+Where `<lang>` is a language code or a comma-separated list of language codes.
+For example:
+
+```bash
+php artisan translations:translate es
+php artisan translations:translate es,bg,de
+```
+
+
 ### Persistent Strings
 
 Some strings are not included in the export, because they are being dynamically generated. For example:
@@ -80,12 +95,13 @@ In order for those, manually added, strings not to get removed the next time you
 ```
 [
   ...,
-  "Dear customer, your order has been %s": "",
+  "Dear customer, your order has been %s": "Gentile cliente, il tuo ordine è stato approvato",
   ...
 ]
 ```
 
-You may also use the `persistent-strings-<lang>.json` file to fix some translations when you use autotranslate. When a translation is defined here will not be automatic translated via Google Translate. This is useful for example when the automatic translation output for a particular string is not what you want.
+You may also use the `persistent-strings-<lang>.json` file to fix some translations when you use translate command. 
+When a translation is defined here will not be automatic translated via Google Translate. This is useful for example when the automatic translation output for a particular string is not accurate.
 
 
 ## Contributing

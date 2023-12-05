@@ -13,7 +13,7 @@ class ExportTranslationsCommand extends Command
      *
      * @var string
      */
-    protected $name = 'translations:export';
+    protected $name = 'translations:export {lang}';
 
     /**
      * The console command description.
@@ -23,7 +23,7 @@ class ExportTranslationsCommand extends Command
     protected $description = 'Export translatable strings for a language to a JSON file.';
 
     /**
-     * ExportCommand constructor.
+     * ExportTranslationsCommand constructor.
      *
      * @param  \Goodmagma\Translations\Core\TranslationsExporter  $exporter
      * @return void

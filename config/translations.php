@@ -35,13 +35,6 @@ return [
     // by original strings (keys).
     // It helps navigate a translation file and detect possible duplicates.
     'sort-keys' => true,
-        
-    // Indicates whether it's necessary to exclude Laravel translation keys
-    // from the resulting language file if they have corresponding translations
-    // in the given language.
-    // This option allows correctly combine two translation approaches:
-    // Laravel translation keys (PHP) and translatable strings (JSON).
-    'exclude-translation-keys' => false,
     
     // Indicates whether you need to put untranslated strings
     // at the top of a translation file.
