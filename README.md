@@ -1,7 +1,7 @@
 # Export Strings and Automatic translate via Google Translate Tools for Laravel
 
-[![Latest Version on Packagist](https://poser.pugx.org/goodmagma/laravel-translations/v/stable)](https://packagist.org/packages/goodmagma/laravel-translations)
-[![Total Downloads](https://poser.pugx.org/goodmagma/laravel-translations/downloads)](https://packagist.org/packages/goodmagma/laravel-translations)
+[![Latest Version](https://img.shields.io/github/release/goodmagma/laravel-translations.svg)](https://github.com/goodmagma/laravel-translations)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/goodmagma/laravel-translations.svg)](https://packagist.org/packages/goodmagma/laravel-translations)
 [![Tests Status Badge](https://github.com/goodmagma/laravel-translations/actions/workflows/run-tests.yml/badge.svg)](https://github.com/goodmagma/laravel-translations/actions/workflows/run-tests.yml)
 [![PHPStan Status Badge](https://github.com/goodmagma/laravel-translations/actions/workflows/phpstan.yml.yml/badge.svg)](https://github.com/goodmagma/laravel-translations/actions/workflows/phpstan.yml.yml)
 [![Code Styles Check Badge](https://github.com/goodmagma/laravel-translations/actions/workflows/php-cs-fixer.yml/badge.svg)](https://github.com/goodmagma/laravel-translations/actions/workflows/php-cs-fixer.yml)
