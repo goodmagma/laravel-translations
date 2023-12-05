@@ -7,15 +7,13 @@ namespace Goodmagma\Translations\Core\Utils;
  */
 class LangUtils
 {
-    
     /**
      * The filename without extension for persistent strings.
      *
      * @var string
      */
     public const PERSISTENT_STRINGS_FILENAME = 'persistent-strings';
-    
-    
+
     /**
      * Write a string to a file.
      *
@@ -80,9 +78,10 @@ class LangUtils
     public static function persistentStringsLanguageFilePath(string $language)
     {
         $persistentStringsFile = self::PERSISTENT_STRINGS_FILENAME . "-$language";
+
         return self::languageFilePath($persistentStringsFile);
     }
-    
+
     /**
      * Convert an array/object to the properly formatted JSON string.
      *

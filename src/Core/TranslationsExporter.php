@@ -4,11 +4,9 @@ namespace Goodmagma\Translations\Core;
 
 use Goodmagma\Translations\Core\Utils\LangUtils;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Lang;
 
 class TranslationsExporter
 {
-
     /**
      * Extractor object.
      *

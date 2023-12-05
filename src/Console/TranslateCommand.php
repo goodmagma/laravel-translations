@@ -1,16 +1,17 @@
 <?php
+
 namespace Goodmagma\Translations\Console;
 
-use Illuminate\Console\Command;
 use Goodmagma\Translations\Core\TranslationsTranslate;
+use Illuminate\Console\Command;
 
 /**
  * Get tradable asset pairs and save it on assetpair table
  *
  * @author Denis
  */
-class TranslateCommand extends Command {
-	
+class TranslateCommand extends Command
+{
     /**
      * The name and signature of the console command.
      *
@@ -25,7 +26,6 @@ class TranslateCommand extends Command {
      */
     protected $description = 'Translate string using Google Translate';
 
-    
     /**
      * TranslateCommand constructor.
      *
@@ -37,18 +37,18 @@ class TranslateCommand extends Command {
         parent::__construct();
     }
 
-    
     /**
      * Execute task
-     * 
+     *
      */
-	public function handle() {
-	    $languages = explode(',', $this->argument('lang'));
-	    
-	    foreach ($languages as $language) {
-	        $this->translator->translate($language);
-	        
-	        $this->info('Translated strings have been written to the lang/' . $language . '.json file.');
-	    }
-	}
+    public function handle()
+    {
+        $languages = explode(',', $this->argument('lang'));
+
+        foreach ($languages as $language) {
+            $this->translator->translate($language);
+
+            $this->info('Translated strings have been written to the lang/' . $language . '.json file.');
+        }
+    }
 }

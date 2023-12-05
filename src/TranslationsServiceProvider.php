@@ -3,12 +3,11 @@
 namespace Goodmagma\Translations;
 
 use Goodmagma\Translations\Console\ExportTranslationsCommand;
+use Goodmagma\Translations\Console\TranslateCommand;
 use Goodmagma\Translations\Core\TranslationsExporter;
+use Goodmagma\Translations\Core\TranslationsTranslate;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use Goodmagma\Translations\Core\StringTranslator;
-use Goodmagma\Translations\Console\TranslateCommand;
-use Goodmagma\Translations\Core\TranslationsTranslate;
 
 class TranslationsServiceProvider extends ServiceProvider
 {
@@ -39,11 +38,11 @@ class TranslationsServiceProvider extends ServiceProvider
             return new ExportTranslationsCommand($app->make(TranslationsExporter::class));
         });
         $this->commands(ExportTranslationsCommand::class);
-        
+
         $this->app->singleton(TranslationsTranslate::class, function (Application $app) {
             return new TranslationsTranslate();
         });
-            
+
         $this->app->singleton(TranslateCommand::class, function (Application $app) {
             return new TranslateCommand($app->make(TranslationsTranslate::class));
         });
