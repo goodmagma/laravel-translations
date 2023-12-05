@@ -1,8 +1,8 @@
 # Export Strings and Automatic translate via Google Translate Tools for Laravel
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/goodmagma/laravel-translations.svg?style=for-the-badge)](https://packagist.org/packages/goodmagma/laravel-translations)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/goodmagma/laravel-translations/run-tests.yml?branch=master&label=tests&style=for-the-badge)](https://github.com/goodmagma/laravel-translations/actions?query=workflow%3Arun-tests+branch%3Amaster)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/goodmagma/laravel-translations/fix-php-code-style-issues.yml?branch=master&label=code%20style&style=for-the-badge)](https://github.com/goodmagma/laravel-translations/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amaster)
+[![Tests Status Badge](https://github.com/goodmagma/laravel-translations/actions/workflows/run-tests.yml/badge.svg)](https://github.com/goodmagma/laravel-translations/actions/workflows/run-tests.yml)
+[![PHPStan Status Badge](https://github.com/goodmagma/laravel-translations/actions/workflows/phpstan.yml.yml/badge.svg)](https://github.com/goodmagma/laravel-translations/actions/workflows/phpstan.yml.yml)
+[![Code Styles Check Badge](https://github.com/goodmagma/laravel-translations/actions/workflows/php-cs-fixer.yml/badge.svg)](https://github.com/goodmagma/laravel-translations/actions/workflows/php-cs-fixer.yml)
 
 You can use `__('Translate me')` or `@lang('Translate me')` with translations in JSON files to translate strings.
 Laravel Translation Tools is composed by two commands:
