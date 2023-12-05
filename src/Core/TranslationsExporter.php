@@ -138,7 +138,7 @@ class TranslationsExporter
         // Sort the translations if enabled through the config.
         return $this->sortStrings($translatable_strings);
     }
-    
+
     /**
      * Filtering an array by its keys using a callback.
      *
