@@ -29,7 +29,7 @@ class TranslateCommand extends Command {
     /**
      * TranslateCommand constructor.
      *
-     * @param  \Goodmagma\Translations\Core\TranslationsExporter  $exporter
+     * @param  \Goodmagma\Translations\Core\TranslationsTranslate  $translator
      * @return void
      */
     public function __construct(protected TranslationsTranslate $translator)

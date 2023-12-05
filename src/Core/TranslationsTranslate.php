@@ -11,7 +11,7 @@ class TranslationsTranslate extends TranslationsExporter
     /**
      * Extractor object.
      *
-     * @var \Goodmagma\Translations\Core\StringExtractor
+     * @var \Stichoza\GoogleTranslate\GoogleTranslate
      */
     private $gtranslate;
 
