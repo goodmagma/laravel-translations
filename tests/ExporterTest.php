@@ -2,13 +2,11 @@
 
 namespace Tests;
 
-use Goodmagma\Translations\Core\TranslationsExporter;
-use Tests\__fixtures\classes\Transformer;
 use Goodmagma\Translations\Core\Utils\LangUtils;
+use Tests\__fixtures\classes\Transformer;
 
 class ExporterTest extends BaseTestCase
 {
-
     public function testTranslationFilesCreation()
     {
         $this->removeJsonLanguageFiles();
@@ -424,7 +422,7 @@ EOD;
             ->assertExitCode(0);
 
         $actual = $this->getTranslationFileContent('es');
-        
+
         $expected = [
             'STATIC TEXT TO TRANSLATE' => 'STATIC TEXT TO TRANSLATE',
             'PUBLIC TEXT TO TRANSLATE' => 'PUBLIC TEXT TO TRANSLATE',
