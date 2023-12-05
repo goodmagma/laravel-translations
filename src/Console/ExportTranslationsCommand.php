@@ -25,7 +25,7 @@ class ExportTranslationsCommand extends Command
     /**
      * ExportCommand constructor.
      *
-     * @param  \Goodmagma\TranslationTools\Core\TranslationExporter  $exporter
+     * @param  \Goodmagma\Translations\Core\TranslationExporter  $exporter
      * @return void
      */
     public function __construct(protected TranslationExporter $exporter)
