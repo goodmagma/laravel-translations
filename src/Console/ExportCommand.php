@@ -4,7 +4,6 @@ namespace Goodmagma\Translations\Console;
 
 use Goodmagma\Translations\Core\TranslationsExporter;
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputArgument;
 
 class ExportCommand extends Command
 {
@@ -13,7 +12,7 @@ class ExportCommand extends Command
      *
      * @var string
      */
-    protected $name = 'translations:export';
+    protected $signature = 'translations:export {lang}';
 
     /**
      * The console command description.
@@ -49,21 +48,5 @@ class ExportCommand extends Command
         }
 
         return static::SUCCESS;
-    }
-
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return [
-            [
-                'lang',
-                InputArgument::REQUIRED,
-                'A language code or a comma-separated list of language codes for which the translatable strings are extracted, e.g. "es" or "es,bg,de".',
-            ],
-        ];
     }
 }

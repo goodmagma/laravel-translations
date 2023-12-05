@@ -4,7 +4,6 @@ namespace Goodmagma\Translations\Console;
 
 use Goodmagma\Translations\Core\TranslationsTranslate;
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * Get tradable asset pairs and save it on assetpair table
@@ -18,7 +17,7 @@ class TranslateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'translations:translate';
+    protected $signature = 'translations:translate {lang}';
 
     /**
      * The console command description.
@@ -51,21 +50,5 @@ class TranslateCommand extends Command
 
             $this->info('Translated strings have been written to the lang/' . $language . '.json file.');
         }
-    }
-    
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return [
-            [
-                'lang',
-                InputArgument::REQUIRED,
-                'A language code or a comma-separated list of language codes for which the translatable strings are extracted, e.g. "es" or "es,bg,de".',
-            ],
-        ];
     }
 }
