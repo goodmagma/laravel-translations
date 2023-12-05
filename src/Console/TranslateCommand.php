@@ -52,7 +52,7 @@ class TranslateCommand extends Command
             $this->info('Translated strings have been written to the lang/' . $language . '.json file.');
         }
     }
-    
+
     /**
      * Get the console command arguments.
      *
