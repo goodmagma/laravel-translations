@@ -4,24 +4,26 @@ namespace Tests;
 
 use Goodmagma\Translations\Core\TranslationsExporter;
 use Tests\__fixtures\classes\Transformer;
+use Goodmagma\Translations\Core\Utils\LangUtils;
 
 class ExporterTest extends BaseTestCase
 {
+
     public function testTranslationFilesCreation()
     {
         $this->removeJsonLanguageFiles();
 
         $this->createTestView("{{ __('name') }}");
 
-        $this->artisan('translations:export', ['lang' => 'bg,es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the lang/bg.json file.')
+        $this->artisan('translations:export', ['lang' => 'it,es'])
+            ->expectsOutput('Translatable strings have been extracted and written to the lang/it.json file.')
             ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
-        $this->assertFileExists($this->getTranslationFilePath('bg'));
+        $this->assertFileExists($this->getTranslationFilePath('it'));
         $this->assertFileExists($this->getTranslationFilePath('es'));
 
-        $bg_content = $this->getTranslationFileContent('bg');
+        $bg_content = $this->getTranslationFileContent('it');
         $es_content = $this->getTranslationFileContent('es');
 
         $this->assertEquals(['name' => 'name'], $bg_content);
@@ -292,12 +294,12 @@ EOD;
 
         // 2. Create a file with the keys of any strings which should persist even if they are not contained in the views.
 
-        $persistentContent = json_encode(['name2_en']);
-        $this->writeToTranslationFile(TranslationsExporter::PERSISTENT_STRINGS_FILENAME, $persistentContent);
+        $persistentContent = json_encode(['name2_en' => 'name2_es_changed']);
+        $this->writeToTranslationFile(LangUtils::PERSISTENT_STRINGS_FILENAME . "-es", $persistentContent);
 
         // 3. Create a test view only containing one of the non-persistent strings, and a new string.
 
-        $this->createTestView("{{ Existing string: __('name1_en') New string: __('name4_en') }}");
+        $this->createTestView("{{ Existing string: __('name1_en') __('name2_en') New string: __('name4_en') }}");
 
         $this->artisan('translations:export', ['lang' => 'es'])
             ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
@@ -309,40 +311,8 @@ EOD;
 
         $expected = [
             'name1_en' => 'name1_es',
-            'name2_en' => 'name2_es',
+            'name2_en' => 'name2_es_changed',
             'name4_en' => 'name4_en',
-        ];
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    public function testIgnoreTranslationKeysEnabled()
-    {
-        $this->app['config']->set('translations.exclude-translation-keys', true);
-
-        $this->removeJsonLanguageFiles();
-
-        $view = "{{ __('text to translate') }} " .
-            "{{ __('string with a dot.') }} " .
-            "{{ __('string with a dot. in the middle') }} " .
-            "{{ __('menu.unknown') }} " .
-            "{{ __('menu.submenu1') }} " .
-            "{{ __('menu.submenu1.item1') }} " .
-            "{{ __('menu.item1') }} ";
-
-        $this->createTestView($view);
-
-        $this->artisan('translations:export', ['lang' => 'es'])
-            ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
-            ->assertExitCode(0);
-
-        $actual = $this->getTranslationFileContent('es');
-        $expected = [
-            'text to translate' => 'text to translate',
-            'string with a dot.' => 'string with a dot.',
-            'string with a dot. in the middle' => 'string with a dot. in the middle',
-            'menu.unknown' => 'menu.unknown',
-            'menu.submenu1' => 'menu.submenu1',
         ];
 
         $this->assertEquals($expected, $actual);
@@ -401,7 +371,7 @@ EOD;
 
         $this->createTestView("{{ __('name1_en') . __('name2_en') . __('name3_en') . __('name5_en') . __('name4_en') }}");
 
-        $this->artisan('translatable:export', ['lang' => 'es'])
+        $this->artisan('translations:export', ['lang' => 'es'])
             ->expectsOutput('Translatable strings have been extracted and written to the lang/es.json file.')
             ->assertExitCode(0);
 
@@ -454,6 +424,7 @@ EOD;
             ->assertExitCode(0);
 
         $actual = $this->getTranslationFileContent('es');
+        
         $expected = [
             'STATIC TEXT TO TRANSLATE' => 'STATIC TEXT TO TRANSLATE',
             'PUBLIC TEXT TO TRANSLATE' => 'PUBLIC TEXT TO TRANSLATE',

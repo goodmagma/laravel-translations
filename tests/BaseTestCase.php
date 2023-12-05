@@ -56,6 +56,7 @@ class BaseTestCase extends TestCase
     protected function getTranslationFileContent($language)
     {
         $path = $this->getTranslationFilePath($language);
+        
         $content = file_get_contents($path);
 
         return json_decode($content, true);

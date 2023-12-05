@@ -17,7 +17,7 @@ class TranslateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'translations:translate {lang}';
+    protected $signature = 'translations:translate';
 
     /**
      * The console command description.

@@ -6,14 +6,14 @@ use Goodmagma\Translations\Core\TranslationsExporter;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 
-class ExportTranslationsCommand extends Command
+class ExportCommand extends Command
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'translations:export {lang}';
+    protected $name = 'translations:export';
 
     /**
      * The console command description.

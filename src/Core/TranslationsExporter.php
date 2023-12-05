@@ -44,9 +44,6 @@ class TranslationsExporter
         $persistent_strings_path = LangUtils::persistentStringsLanguageFilePath($language);
         $persistent_strings = LangUtils::readTranslationFile($persistent_strings_path);
 
-        // Add persistent strings to the export if enabled.
-        //$new_strings = $this->addPersistentStrings($new_strings, $persistent_strings);
-
         // Merge old an new translations preserving existing translations and persistent strings.
         $resulting_strings = $this->mergeStrings($new_strings, $existing_strings, $persistent_strings);
 
@@ -71,7 +68,9 @@ class TranslationsExporter
         $merged_strings = array_merge($new_strings, $existing_strings);
         $merged_strings = array_merge($merged_strings, $persistent_strings);
 
-        return $merged_strings;
+        return $this->arrayFilterByKey($merged_strings, function ($key) use ($persistent_strings, $new_strings) {
+            return in_array($key, $persistent_strings) || array_key_exists($key, $new_strings);
+        });
     }
 
     /**
@@ -138,5 +137,21 @@ class TranslationsExporter
 
         // Sort the translations if enabled through the config.
         return $this->sortStrings($translatable_strings);
+    }
+    
+    /**
+     * Filtering an array by its keys using a callback.
+     *
+     * @param  array  $array
+     *  The array to iterate over.
+     * @param  callable  $callback
+     *  The callback function to use.
+     *
+     * @return array
+     *  The filtered array.
+     */
+    private function arrayFilterByKey($array, $callback)
+    {
+        return array_filter($array, $callback, ARRAY_FILTER_USE_KEY);
     }
 }
