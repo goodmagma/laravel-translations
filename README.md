@@ -3,7 +3,6 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/goodmagma/laravel-translations.svg?style=for-the-badge)](https://packagist.org/packages/goodmagma/laravel-translations)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/goodmagma/laravel-translations/run-tests.yml?branch=master&label=tests&style=for-the-badge)](https://github.com/goodmagma/laravel-translations/actions?query=workflow%3Arun-tests+branch%3Amaster)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/goodmagma/laravel-translations/fix-php-code-style-issues.yml?branch=master&label=code%20style&style=for-the-badge)](https://github.com/goodmagma/laravel-translations/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amaster)
-[![Twitter Follow](https://img.shields.io/badge/follow-%40danmasonmp-1DA1F2?logo=twitter&style=for-the-badge)](https://twitter.com/danmasonmp)
 
 You can use `__('Translate me')` or `@lang('Translate me')` with translations in JSON files to translate strings.
 Laravel Translation Tools is composed by two commands:
