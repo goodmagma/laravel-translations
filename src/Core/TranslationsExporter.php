@@ -2,9 +2,9 @@
 
 namespace Goodmagma\Translations\Core;
 
+use Goodmagma\Translations\Core\Utils\LangUtils;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Lang;
-use Goodmagma\Translations\Core\Utils\LangUtils;
 
 class TranslationsExporter
 {
@@ -113,7 +113,7 @@ class TranslationsExporter
      */
     protected function addPersistentStrings(array $new_strings, array $persistent_strings)
     {
-        $new_strings = array_merge( array_combine($persistent_strings, $persistent_strings), $new_strings );
+        $new_strings = array_merge(array_combine($persistent_strings, $persistent_strings), $new_strings);
 
         return $new_strings;
     }
