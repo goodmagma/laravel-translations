@@ -17,17 +17,17 @@
 		}
 	],
 	"require" : {
-		"php" : "^8.0",
+		"php" : "^8.2",
 		"ext-json" : "*",
-		"illuminate/support" : "^8|^9|^10.0",
-		"illuminate/translation" : "^8|^9|^10.0",
-		"stichoza/google-translate-php" : "^5.1",
-		"symfony/finder" : "^5|^6"
+		"illuminate/support" : "^11.0|^12.0",
+		"illuminate/translation" : "^11.0|^12.0",
+		"stichoza/google-translate-php" : "^5.2",
+		"symfony/finder" : "^7.2"
 	},
 	"require-dev" : {
-		"nunomaduro/larastan" : "^1.0|^2.0",
-		"orchestra/testbench" : "^6.0|^7.0|^8.0",
-		"phpunit/phpunit" : "^9.0"
+		"larastan/larastan" : "^3.0",
+		"orchestra/testbench" : "^10.0",
+		"phpunit/phpunit" : "^11.5|^12.0"
 	},
 	"autoload" : {
 		"psr-4" : {

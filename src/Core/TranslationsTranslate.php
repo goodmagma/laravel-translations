@@ -47,7 +47,7 @@ class TranslationsTranslate extends TranslationsExporter
         $translated_strings = [];
         foreach ($existing_strings as $key => $value) {
             //already translated?
-            if($key == $value) {
+            if ($key == $value) {
                 $text = $this->gtranslate->translate($key);
 
                 $translated_strings[$key] = $text;
