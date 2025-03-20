@@ -19,7 +19,7 @@ class TranslationsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../../config/translations.php' => config_path('translations.php'),
+            __DIR__ . '/../config/translations.php' => config_path('translations.php'),
         ], 'translations-config');
     }
 
